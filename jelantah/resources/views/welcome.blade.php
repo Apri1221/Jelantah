@@ -389,13 +389,13 @@
                                 <div class="input-field">
                                     <i class="material-icons prefix">people</i>
                                     <label for="username">Username</label>
-                                    <input type="text" id="username" class="validate" required=""
+                                    <input type="text" id="username" name="nama" class="validate" required=""
                                         aria-required="true" />
                                 </div>
                                 <div class="input-field">
                                     <i class="material-icons prefix">vpn_key</i>
                                     <label for="password">Password</label>
-                                    <input type="password" id="password" class="validate" required=""
+                                    <input type="password" id="password" name="password" class="validate" required=""
                                         aria-required="true" />
                                 </div>
                             </div>
@@ -405,7 +405,7 @@
                                 <div class="input-field">
                                     <i class="material-icons prefix">email</i>
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" class="validate" />
+                                    <input type="email" id="email" name="email" class="validate" />
                                 </div>
                             </div>
                             <div class="center-align">
