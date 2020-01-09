@@ -12,12 +12,19 @@ class PenggunaController extends Controller
         return pengguna::all();
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+    
     public function create(request $request){
         if($request->wantsJson()){
             $pengguna = new pengguna;
             $pengguna->nama = $request->nama;
             $pengguna->password = bcrypt($request->password);
+            $pengguna->email = $request->email;
             $pengguna->perangkat = $request->perangkat;
             $pengguna->save();
 
@@ -25,6 +32,13 @@ class PenggunaController extends Controller
         
         } else {
             // I'm from HTTP
+            $pengguna = pengguna::create([
+                'nama' => $request->nama,
+                'password'=> bcrypt($request->password),
+                'email' => $request->email,
+                'perangkat' => $request->perangkat
+            ]);
+            return back();
         }
     }
 

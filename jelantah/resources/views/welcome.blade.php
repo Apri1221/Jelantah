@@ -384,7 +384,8 @@
                 <div class="card amber lighten-5">
                     <div class="card-content">
                         <h5 class="center-align">Buat akun kamu</h5>
-                        <form>
+                        <form action="{{ route('daftar') }}" method="POST">
+                            @csrf
                             <div class="section">
                                 <div class="input-field">
                                     <i class="material-icons prefix">people</i>
@@ -406,6 +407,13 @@
                                     <i class="material-icons prefix">email</i>
                                     <label for="email">Email</label>
                                     <input type="email" id="email" name="email" class="validate" />
+                                </div>
+                            </div>
+                            <div class="section">
+                                <div class="input-field">
+                                    <i class="material-icons prefix">stuf</i>
+                                    <label for="perangkat">Perangkat</label>
+                                    <input type="text" id="perangkat" name="perangkat" class="validate" />
                                 </div>
                             </div>
                             <div class="center-align">
