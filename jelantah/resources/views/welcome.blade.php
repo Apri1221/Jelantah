@@ -384,7 +384,7 @@
                 <div class="card amber lighten-5">
                     <div class="card-content">
                         <h5 class="center-align">Buat akun kamu</h5>
-                        <form method="POST" action="/daftar">
+                        <form action="{{route('daftar')}}" method="POST" >
                             <div class="section">
                                 <div class="input-field">
                                     <i class="material-icons prefix">people</i>

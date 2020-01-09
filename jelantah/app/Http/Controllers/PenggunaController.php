@@ -26,6 +26,14 @@ class PenggunaController extends Controller
         
         } else {
             // I'm from HTTP
+            $pengguna = new pengguna;
+            $pengguna->nama = $request->nama;
+            $pengguna->password = bcrypt($request->password);
+            $pengguna->perangkat = $request->perangkat;
+            $pengguna->email = $request->email;
+            $pengguna->save();
+
+            return back();
         }
     }
 

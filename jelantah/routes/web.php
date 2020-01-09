@@ -17,4 +17,4 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::post('/daftar', 'PenggunaController@create');
+Route::post('/daftar', 'PenggunaController@create')->name('daftar');
