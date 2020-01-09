@@ -384,7 +384,8 @@
                 <div class="card amber lighten-5">
                     <div class="card-content">
                         <h5 class="center-align">Buat akun kamu</h5>
-                        <form action="{{route('daftar')}}" method="POST" >
+                        <form action="{{ route('daftar') }}" method="POST">
+                            @csrf
                             <div class="section">
                                 <div class="input-field">
                                     <i class="material-icons prefix">people</i>

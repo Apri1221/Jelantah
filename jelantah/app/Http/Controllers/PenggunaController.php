@@ -26,7 +26,6 @@ class PenggunaController extends Controller
             $pengguna->password = bcrypt($request->password);
             $pengguna->email = $request->email;
             $pengguna->perangkat = $request->perangkat;
-            $pengguna->email = $request->email;
             $pengguna->save();
 
             return "Data berhasil disimpan";
