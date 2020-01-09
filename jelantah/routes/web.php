@@ -16,6 +16,3 @@
 // });
 
 Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/daftar', 'PenggunaController@create')->name('home');
-
