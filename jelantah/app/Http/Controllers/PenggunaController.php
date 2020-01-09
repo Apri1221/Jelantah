@@ -14,14 +14,19 @@ class PenggunaController extends Controller
 
 
     public function create(request $request){
-        $pengguna = new pengguna;
-        $pengguna->nama = $request->nama;
-        $pengguna->password = bcrypt($request->password);
-        $pengguna->perangkat = $request->perangkat;
-        $pengguna->email = $request->email;
-        $pengguna->save();
+        if($request->wantsJson()){
+            $pengguna = new pengguna;
+            $pengguna->nama = $request->nama;
+            $pengguna->password = bcrypt($request->password);
+            $pengguna->perangkat = $request->perangkat;
+            $pengguna->email = $request->email;
+            $pengguna->save();
 
-        return "Data berhasil disimpan";
+            return "Data berhasil disimpan";
+        
+        } else {
+            // I'm from HTTP
+        }
     }
 
 
