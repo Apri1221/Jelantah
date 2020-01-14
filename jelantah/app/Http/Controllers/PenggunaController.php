@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\pengguna;
 use Hash;
+use Session;
 
 class PenggunaController extends Controller
 {
@@ -117,8 +118,8 @@ class PenggunaController extends Controller
 
         
         if ($result && $boolPass) { // return true jika ada        
-            // Session::put('login', 'Selamat anda berhasil login');
-            return redirect('/')->with('account', $result);
+            Session::put('account', $result);
+            return redirect('/');
         } else {
             $request->session()->flash('gagal', 'Login gagal, data salah');
             return redirect('/');
