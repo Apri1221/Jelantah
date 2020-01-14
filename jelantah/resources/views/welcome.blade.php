@@ -13,21 +13,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <!-- MQTT websocket -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
-    <script type="text/javascript"
-        src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.1.0/chartjs-plugin-streaming.js">
-    </script>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
     <style>
@@ -156,15 +147,137 @@
     h5 {
         padding: 20px 0;
     }
+
+    .btn-block {
+        width: 100%;
+    }
+
+
+    /* created by apri, make flip card */
+    .flipbutton {
+        cursor: pointer;
+    }
+
+    @keyframes no-show {
+        0% {
+            transform: rotateY(0deg);
+            height: 100%;
+            width: 100%;
+        }
+
+        49% {
+            height: 100%;
+            width: 100%;
+        }
+
+        50% {
+            transform: rotateY(90deg);
+            height: 0;
+            width: 0;
+        }
+
+        100% {
+            transform: rotateY(180deg);
+            height: 0;
+            width: 0;
+        }
+    }
+
+    @keyframes show {
+        0% {
+            transform: rotateY(-180deg);
+            height: 0;
+            width: 0;
+        }
+
+        49% {
+            transform: rotateY(-90deg);
+            height: 0;
+            width: 0;
+        }
+
+        50% {
+            height: 100%;
+            width: 100%;
+        }
+
+        100% {
+            transform: rotateY(0deg);
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .card-y {
+        position: relative;
+    }
+
+    .front,
+    .back {
+        position: relative;
+        transform-style: preserve-3d;
+        perspective-origin: top center;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        transition-property: transform;
+        animation-fill-mode: forwards;
+        -webkit-animation-fill-mode: forwards;
+        padding: 2px;
+        overflow: hidden;
+    }
+
+    /* front pane, placed above back */
+    .front {
+        z-index: 2;
+        transform: rotateY(0deg);
+        animation-name: show;
+    }
+
+    .card-y.active .front {
+        animation-name: no-show;
+    }
+
+    /* back, initially hidden pane */
+    .back {
+        transform: rotateY(-180deg);
+        animation-name: no-show;
+    }
+
+    .card-y.active .back {
+        animation-name: show;
+    }
+
+    /* end of the flip */
+
+    /* modified of toast materialize */
+    @media only screen and (min-width : 480px) and (max-width : 1000px) {
+        #toast-container {
+            min-width: 30%;
+            bottom: 60%;
+            top: 10%;
+        }
+    }
+
+    @media only screen and (min-width : 480px) {
+        #toast-container {
+            top: auto !important;
+            right: auto !important;
+            bottom: 10%;
+            left: 10%;
+        }
+    }
     </style>
 
     <script type="text/javascript">
     $(document).ready(function() {
 
         $('.parallax').parallax();
+
         $('.sidenav').sidenav({
             edge: 'right', // <--- CHECK THIS OUT
         });
+
+        $('.scrollspy').scrollSpy();
 
         // Create a client instance
         client = new Paho.MQTT.Client("tailor.cloudmqtt.com", 36503, "web_" + parseInt(Math.random() * 100,
@@ -276,7 +389,7 @@
                 },
                 plugins: {
                     streaming: {
-                        duration: 300000, // display data for the latest 
+                        duration: 100000, // display data for the latest 
                         delay: 100,
                         onRefresh: function(myChart) { // callback on chart
                             myChart.data.datasets.forEach(function(dataset) {
@@ -291,11 +404,20 @@
             }
         });
 
+
+        // used for onclick flip a href
+        // end of click function flipped object
+
+        $('.flipbutton').click(function() {
+            $(".card-y").toggleClass("active");
+        });
+
     });
     </script>
 </head>
 
 <body>
+
 
     <div class="footer-fixed" id="menu">
         <nav class="z-depth-0 indigo lighten-1">
@@ -368,8 +490,21 @@
     <div class="container" style="margin-bottom:5em">
 
         <div class="section white">
+            @if(Session::has('account'))
+            <h2>Eh, hi {{ Session::get('account')['nama'] }} ! Long time no see</h2>
+            @else
             <h2 class="header">Every heroes didnt wear a capes</h2>
+            @endif
             <p class="grey-text text-darken-3 lighten-3">Love the process.</p>
+
+            @if(Session::has('gagal'))
+            <script>
+            M.toast({
+                html: "{{ Session::get('gagal') }}",
+                timeRemaining: 10000
+            });
+            </script>
+            @endif
         </div>
         <div class="parallax-container">
             <div class="parallax"><img src="https://brandjaws.com/images/boy.png"></div>
@@ -377,65 +512,119 @@
 
         <div class="section white">
             <h3 class="header">Tertarik menggunakan layanan kami?</h3>
-        </div>
 
-        <div class="row">
-            <div class="col s12 l5">
-                <div class="card amber lighten-5">
-                    <div class="card-content">
-                        <h5 class="center-align">Buat akun kamu</h5>
-                        <form action="{{ route('daftar') }}" method="POST">
-                            @csrf
-                            <div class="section">
-                                <div class="input-field">
-                                    <i class="material-icons prefix">people</i>
-                                    <label for="username">Username</label>
-                                    <input type="text" id="username" name="nama" class="validate" required=""
-                                        aria-required="true" />
-                                </div>
-                                <div class="input-field">
-                                    <i class="material-icons prefix">vpn_key</i>
-                                    <label for="password">Password</label>
-                                    <input type="password" id="password" name="password" class="validate" required=""
-                                        aria-required="true" />
+            <div class="row">
+                <div class="col s12 l5">
+
+                    <div class="card-y">
+                        <div class="front">
+
+                            <div class="card amber lighten-5">
+                                <div class="card-content">
+                                    <h5 class="center-align">Buat akun kamu</h5>
+                                    <form action="{{ route('daftar') }}" method="POST">
+                                        @csrf
+                                        <div class="section">
+                                            <div class="input-field">
+                                                <i class="material-icons prefix">people</i>
+                                                <label for="username_register">Username</label>
+                                                <input type="text" id="username_register" name="nama" class="validate"
+                                                    required="" aria-required="true" />
+                                            </div>
+                                            <div class="input-field">
+                                                <i class="material-icons prefix">vpn_key</i>
+                                                <label for="password_register">Password</label>
+                                                <input type="password" id="password_register" name="password"
+                                                    class="validate" required="" aria-required="true" />
+                                            </div>
+                                        </div>
+                                        <p>Izinkan kami memberikan informasi terbaru terkait produk jelantah kepada kamu
+                                            melalui
+                                            email. Kami tidak akan spam</p>
+                                        <div class="section">
+                                            <div class="input-field">
+                                                <i class="material-icons prefix">email</i>
+                                                <label for="email">Email</label>
+                                                <input type="email" id="email" name="email" class="validate" />
+                                            </div>
+                                            <div class="input-field">
+                                                <i class="material-icons prefix">devices_other</i>
+                                                <label for="perangkat">Perangkat</label>
+                                                <input type="text" id="perangkat" name="perangkat" class="validate" />
+                                            </div>
+                                        </div>
+
+                                        <div class="center-align">
+                                            <button
+                                                class="btn btn-block waves-effect waves-light indigo lighten-1 btn-large"
+                                                type="submit" name="action">Daftar
+                                            </button>
+                                        </div>
+                                        <br>
+                                        <div class="center-align">
+                                            <a class="flipbutton" id="registerButton">Sudah punya akun? Silakan masuk
+                                                disini</a>
+                                        </div>
+
+                                    </form>
                                 </div>
                             </div>
-                            <p>Izinkan kami memberikan informasi terbaru terkait produk jelantah kepada kamu melalui
-                                email. Kami tidak akan spam</p>
-                            <div class="section">
-                                <div class="input-field">
-                                    <i class="material-icons prefix">email</i>
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" class="validate" />
+                        </div>
+
+                        <!-- Login form -->
+                        <div class="back">
+                            <div class="card amber lighten-5">
+                                <div class="card-content">
+                                    <h5 class="center-align">Masuk ke akun kamu</h5>
+                                    <form action="{{ route('masuk') }}" method="POST">
+                                        @csrf
+                                        <div class="section">
+                                            <div class="input-field">
+                                                <i class="material-icons prefix">people</i>
+                                                <label for="username_login">Username</label>
+                                                <input type="text" id="username_login" name="nama" class="validate"
+                                                    required="" aria-required="true" />
+                                            </div>
+                                            <div class="input-field">
+                                                <i class="material-icons prefix">vpn_key</i>
+                                                <label for="password_login">Password</label>
+                                                <input type="password" id="password_login" name="password"
+                                                    class="validate" required="" aria-required="true" />
+                                            </div>
+                                            <!-- <div class="g-recaptcha"
+                                                data-sitekey="6LeSSc4UAAAAABtMqxnHm15hXyxl6g9I-QQuFD_P"></div> -->
+                                        </div>
+
+                                        <div class="center-align">
+                                            <button
+                                                class="btn btn-block waves-effect waves-light indigo lighten-1 btn-large"
+                                                type="submit" name="action">Masuk
+                                            </button>
+                                        </div>
+                                        <br>
+                                        <div class="center-align">
+                                            <a class="flipbutton" id="loginButton">Belum punya akun? Silakan daftar
+                                                disini</a>
+                                        </div>
+
+                                    </form>
                                 </div>
                             </div>
-                            <div class="section">
-                                <div class="input-field">
-                                    <i class="material-icons prefix">stuf</i>
-                                    <label for="perangkat">Perangkat</label>
-                                    <input type="text" id="perangkat" name="perangkat" class="validate" />
-                                </div>
-                            </div>
-                            <div class="center-align">
-                                <button class="btn waves-effect waves-light indigo lighten-1 btn-large" type="submit"
-                                    name="action">Submit
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l7">
+                    <div class="splash-image-container">
+                        <img src="{{ asset('assets/image/undraw_Chef_cu0r.svg') }}" class="splash-image">
                     </div>
                 </div>
             </div>
-            <div class="col s12 l7">
-                <div class="splash-image-container">
-                    <img src="{{ asset('assets/image/undraw_Chef_cu0r.svg') }}" class="splash-image">
-                </div>
-            </div>
         </div>
+
         <div class="section white">
 
             <div>
-            <h3>Visualisasi Data</h3>
+                <h3>Visualisasi Data</h3>
                 <canvas id="mycanvas"></canvas>
             </div>
 
@@ -446,25 +635,28 @@
             </ul>
         </div>
 
-        <!-- SnapWidget -->
-        <div class="snapwidget-rpf" data-widget-id="775058"></div>
-        <script>
-        ! function(s, n, ap) {
-            if (!s.getElementById(ap)) {
-                var a = s.createElement("script");
-                a.id = ap, a.src = "https://snapwidget.com/js/snapwidget-rpf.js", s.getElementsByTagName("head")[0]
-                    .appendChild(a)
-            }
-        }(document, 0, "snaprpf");
-        </script>
-
     </div>
+
+    <!-- MQTT websocket -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!-- charting with chart js -->
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+    <script defer type="text/javascript"
+        src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.1.0/chartjs-plugin-streaming.js">
+    </script>
+
+    <!-- google captcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script>
     $(document).ready(function() {
         $('.tooltipped').tooltip({
             delay: 50
         });
+
     });
     </script>
 

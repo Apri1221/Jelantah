@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('pengguna', 'PenggunaController@index');
-Route::post('pengguna', 'PenggunaController@create');
-Route::put('/pengguna/{nama}', 'PenggunaController@update');
-Route::post('/pengguna/{nama}', 'PenggunaController@delete');
-Route::get('/pengguna/{nama}', 'PenggunaController@get');
+Route::post('pengguna/create', 'PenggunaController@create');
+Route::put('/pengguna/update/{nama}', 'PenggunaController@update');
+Route::post('/pengguna/delete/{nama}', 'PenggunaController@delete');
+Route::get('/pengguna/get/{nama}', 'PenggunaController@get');
