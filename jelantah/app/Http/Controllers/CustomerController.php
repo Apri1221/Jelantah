@@ -140,25 +140,25 @@ class CustomerController extends Controller
         return Customer::where($whereClause)->first();
     }
 
-    
-    public function login(request $request)
-    {
-        request()->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
 
+    public function login(Request $request)
+    {
+        // I'm from HTTP
         $whereClause = ['username' => $request->username];
-        
         $result = Customer::where($whereClause)->first();
-        $boolPass = Hash::check($request->password, $result['password']);
-        
-        if ($result && $boolPass) { // return true jika ada        
-            Session::put('account', $result);
+        $boolPass = Hash::check($result['password'], $request->password);
+
+        if ($result && $boolPass) {
+            $request->session()->flash('gagal', $request->password);
             return back();
         } else {
-            $request->session()->flash('gagal', 'Login gagal, data salah');
-            return redirect('/');
+            $data = [
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+                'email' => $request->email,
+            ];
+            Session::put('account', $data);
+            return back();
         }
     }
 }

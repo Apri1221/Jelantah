@@ -64,57 +64,6 @@
         width: 82px;
     }
 
-    .splash-image-container {
-        width: 100%;
-        max-width: 740px;
-    }
-
-    @media only screen and (max-width: 992px) {
-        .splash-image-container {
-            margin-top: 0;
-            padding-top: 0px;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            max-width: initial
-        }
-    }
-
-    .splash-image-kbremote {
-        height: 100%;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        -ms-border-radius: 8px;
-        -o-border-radius: 8px;
-        border-radius: 8px
-    }
-
-    .splash-image {
-        width: 100%;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        -ms-border-radius: 8px;
-        -o-border-radius: 8px;
-        border-radius: 8px
-    }
-
-    @media only screen and (max-width: 992px) {
-        .splash-image {
-            width: 100%;
-            max-width: 740px;
-            max-height: 100%;
-            margin-bottom: -44px
-        }
-
-        .splash-image-kbremote {
-            width: 100%;
-            max-width: 740px;
-            max-height: 100%;
-            margin-bottom: -44px
-        }
-    }
-
-
     /* label focus color */
     .input-field input:focus+label {
         color: #5c6bc0 !important;
@@ -265,6 +214,62 @@
             bottom: 10%;
             left: 10%;
         }
+    }
+
+
+    .showcase::after {
+        content: '';
+        height: 60vh;
+        width: 100%;
+        background-image: url("{{ asset('assets/images/showcase_jelantah.jpg') }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        transform: scale(0.998);
+        display: block;
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+        transition: all 1000ms;
+    }
+
+    .showcase:hover::after {
+        transform: scale(1);
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+
+    .showcase:hover .content {
+        filter: blur(2px);
+        -webkit-filter: blur(2px);
+    }
+
+    .content {
+        position: absolute;
+        z-index: 1;
+        top: 5%;
+        left: 50%;
+        margin-top: 5%;
+        margin-left: -155px;
+        width: 350px;
+        height: 350px;
+        text-align: center;
+        transition: all 1000ms;
+        color: white
+    }
+
+    .content .logo {
+        height: 180px;
+        width: 180px;
+    }
+
+    .content .title {
+        font-size: 2.2rem;
+        margin-top: 1rem;
+    }
+
+    .content .text {
+        line-height: 1.7;
+        margin-top: 1rem;
     }
     </style>
 
@@ -452,39 +457,14 @@
         </ul>
     </div>
 
-    <div class="white no-pad-top">
-        <div class="section amber darken-1 no-pad-bot z-depth-1 start-splash-section">
-            <div class="container start-splash-container" style="margin-top:5em">
-                <div class="row">
-                    <div class="col s12 l6">
-                        <div class="white-text">
-                            <h4 class="white-text">
-                                Create public kiosks, interactive digital signage and more with any Android&trade;
-                                device. Display your web page(s) and prevent access to system settings &amp; other
-                                applications.
-                            </h4>
-                            <a
-                                href="https://play.google.com/store/apps/details?id=com.procoit.kioskbrowser&amp;utm_source=global_co&amp;utm_medium=prtnr&amp;utm_content=Mar2515&amp;utm_campaign=PartBadge&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img
-                                    alt="Get it on Google Play"
-                                    src="https://www.android-kiosk.com/wp-content/themes/androidkioskcom/images/google-play-badge.png"
-                                    width="148"></a>
-                            <!--<a class="waves-effect waves-light btn white text-primarycolor" style="margin-bottom:50px;margin-right: 10px;margin-top:0px;" href="http://sites.fastspring.com/androidkiosk/product/kioskbrowserpro"><i class="mdi mdi-credit-card left" ></i>Buy</a>-->
-                            <a class="waves-effect waves-light btn white modal-trigger"
-                                style="margin-bottom:50px;margin-right: 10px;margin-top:0px; color:black;"
-                                href="#">Selengkapnya</a>
-                        </div>
-                        </p>
-                    </div>
-                    <div class="col s12 l6">
-                        <div class="splash-image-container">
-                            <img src="https://www.android-kiosk.com/wp-content/themes/androidkioskcom/images/splash5.png"
-                                class="splash-image">
-                        </div>
-                    </div>
-                </div>
+    <header class="showcase">
+        <div class="content">
+            <img src="https://image.ibb.co/ims4Ep/logo.png" class="logo" alt="Traversy Media">
+            <div class="title">
+                We Offer You a New Era of Technology
             </div>
         </div>
-    </div>
+    </header>
 
 
     <div class="container" style="margin-bottom:5em">
@@ -528,8 +508,8 @@
                                             <div class="input-field">
                                                 <i class="material-icons prefix">people</i>
                                                 <label for="username_register">Username</label>
-                                                <input type="text" id="username_register" name="username" class="validate"
-                                                    required="" aria-required="true" />
+                                                <input type="text" id="username_register" name="username"
+                                                    class="validate" required="" aria-required="true" />
                                             </div>
                                             <div class="input-field">
                                                 <i class="material-icons prefix">vpn_key</i>
@@ -538,7 +518,8 @@
                                                     class="validate" required="" aria-required="true" />
                                             </div>
                                         </div>
-                                        <p>Jika tidak keberatan, izinkan kami memberikan informasi terbaru terkait produk jelantah kepada kamu
+                                        <p>Jika tidak keberatan, izinkan kami memberikan informasi terbaru terkait
+                                            produk jelantah kepada kamu
                                             melalui email.</p>
                                         <div class="section">
                                             <div class="input-field">
@@ -590,8 +571,6 @@
                                                 <input type="password" id="password_login" name="password"
                                                     class="validate" required="" aria-required="true" />
                                             </div>
-                                            <!-- <div class="g-recaptcha"
-                                                data-sitekey="6LeSSc4UAAAAABtMqxnHm15hXyxl6g9I-QQuFD_P"></div> -->
                                         </div>
 
                                         <div class="center-align">
@@ -646,9 +625,6 @@
     <script defer type="text/javascript"
         src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.1.0/chartjs-plugin-streaming.js">
     </script>
-
-    <!-- google captcha -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script>
     $(document).ready(function() {

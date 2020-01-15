@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::post('/register', 'CustomerController@store')->name('register');
 Route::post('/login', 'CustomerController@login')->name('login');
