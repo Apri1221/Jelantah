@@ -11,11 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::post('/daftar', 'PenggunaController@create')->name('daftar');
-Route::post('/login', 'PenggunaController@login')->name('masuk');
+Route::post('/register', 'CustomerController@store')->name('register');
+Route::post('/login', 'CustomerController@login')->name('login');

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Jelantah</title>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -491,7 +491,7 @@
 
         <div class="section white">
             @if(Session::has('account'))
-            <h2>Eh, hi {{ Session::get('account')['nama'] }} ! Long time no see</h2>
+            <h2>Eh, hi {{ Session::get('account')['username'] }} ! Long time no see</h2>
             @else
             <h2 class="header">Every heroes didnt wear a capes</h2>
             @endif
@@ -522,13 +522,13 @@
                             <div class="card amber lighten-5">
                                 <div class="card-content">
                                     <h5 class="center-align">Buat akun kamu</h5>
-                                    <form action="{{ route('daftar') }}" method="POST">
+                                    <form action="{{ route('register') }}" method="POST">
                                         @csrf
                                         <div class="section">
                                             <div class="input-field">
                                                 <i class="material-icons prefix">people</i>
                                                 <label for="username_register">Username</label>
-                                                <input type="text" id="username_register" name="nama" class="validate"
+                                                <input type="text" id="username_register" name="username" class="validate"
                                                     required="" aria-required="true" />
                                             </div>
                                             <div class="input-field">
@@ -538,9 +538,8 @@
                                                     class="validate" required="" aria-required="true" />
                                             </div>
                                         </div>
-                                        <p>Izinkan kami memberikan informasi terbaru terkait produk jelantah kepada kamu
-                                            melalui
-                                            email. Kami tidak akan spam</p>
+                                        <p>Jika tidak keberatan, izinkan kami memberikan informasi terbaru terkait produk jelantah kepada kamu
+                                            melalui email.</p>
                                         <div class="section">
                                             <div class="input-field">
                                                 <i class="material-icons prefix">email</i>
@@ -576,13 +575,13 @@
                             <div class="card amber lighten-5">
                                 <div class="card-content">
                                     <h5 class="center-align">Masuk ke akun kamu</h5>
-                                    <form action="{{ route('masuk') }}" method="POST">
+                                    <form action="{{ route('login') }}" method="POST">
                                         @csrf
                                         <div class="section">
                                             <div class="input-field">
                                                 <i class="material-icons prefix">people</i>
                                                 <label for="username_login">Username</label>
-                                                <input type="text" id="username_login" name="nama" class="validate"
+                                                <input type="text" id="username_login" name="username" class="validate"
                                                     required="" aria-required="true" />
                                             </div>
                                             <div class="input-field">
@@ -615,7 +614,7 @@
                 </div>
                 <div class="col s12 l7">
                     <div class="splash-image-container">
-                        <img src="{{ asset('assets/image/undraw_Chef_cu0r.svg') }}" class="splash-image">
+                        <img src="{{ asset('assets/images/undraw_Chef_cu0r.svg') }}" class="splash-image">
                     </div>
                 </div>
             </div>
