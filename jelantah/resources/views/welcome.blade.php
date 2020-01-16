@@ -32,6 +32,10 @@
         flex-direction: column;
     }
 
+    img {
+        width: 100%
+    }
+
     .navbar-fixed nav {
         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
