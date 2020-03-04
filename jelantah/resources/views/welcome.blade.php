@@ -1,232 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Jelantah</title>
-
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,700">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <!-- Styles -->
+@extends('layouts.app')
+@section('content')
+    @push('html')
+    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    @endpush
+    @push('css_before')
     <style>
-    body {
-        font-family: 'Raleway', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        display: flex;
-        font-size: 18px !important;
-        min-height: 100vh;
-        flex-direction: column;
-    }
-
-    img {
-        width: 100%
-    }
-
-    .navbar-fixed nav {
-        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    }
-
-    .footer-fixed footer {
-        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    }
-
-    main {
-        flex: 1 0 auto;
-    }
-
-    .footer-fixed {
-        position: fixed;
-        bottom: 0;
-        z-index: 1080;
-        width: 100%;
-    }
-
-    footer ul.justify {
-        text-align: center;
-        display: table;
-        overflow: hidden;
-        margin: 0 auto;
-    }
-
-    footer ul.justify li {
-        margin-left: auto;
-        margin-right: auto;
-        width: 82px;
-    }
-
-    /* label focus color */
-    .input-field input:focus+label {
-        color: #5c6bc0 !important;
-    }
-
-    /* label underline focus color */
-    .row .input-field input:focus {
-        border-bottom: 1px solid #5c6bc0 !important;
-        box-shadow: 0 1px 0 0 #5c6bc0 !important
-    }
-
-    .input-field .prefix.active {
-        color: #ffb300 !important;
-    }
-
-    .sidenav li>a,
-    .subheader {
-        font-size: 20px !important
-    }
-
-    .sidenav li>a.active {
-        background-color: #00bcd4 !important;
-        color: #fff
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-        padding: 20px 0;
-    }
-
-    .btn-block {
-        box-shadow: 0 .75rem .5rem -.5rem hsl(0, 50%, 80%) !important;
-        width: 100%;
-    }
-
-
-    /* created by apri, make flip card */
-    .flipbutton {
-        cursor: pointer;
-    }
-
-    @keyframes no-show {
-        0% {
-            transform: rotateY(0deg);
-            height: 100%;
-            width: 100%;
-        }
-
-        49% {
-            height: 100%;
-            width: 100%;
-        }
-
-        50% {
-            transform: rotateY(90deg);
-            height: 0;
-            width: 0;
-        }
-
-        100% {
-            transform: rotateY(180deg);
-            height: 0;
-            width: 0;
-        }
-    }
-
-    @keyframes show {
-        0% {
-            transform: rotateY(-180deg);
-            height: 0;
-            width: 0;
-        }
-
-        49% {
-            transform: rotateY(-90deg);
-            height: 0;
-            width: 0;
-        }
-
-        50% {
-            height: 100%;
-            width: 100%;
-        }
-
-        100% {
-            transform: rotateY(0deg);
-            height: 100%;
-            width: 100%;
-        }
-    }
-
-    .card-y {
-        position: relative;
-    }
-
-    .front,
-    .back {
-        position: relative;
-        transform-style: preserve-3d;
-        perspective-origin: top center;
-        animation-duration: 1s;
-        animation-timing-function: linear;
-        transition-property: transform;
-        animation-fill-mode: forwards;
-        -webkit-animation-fill-mode: forwards;
-        padding: 2px;
-        overflow: hidden;
-    }
-
-    /* front pane, placed above back */
-    .front {
-        z-index: 2;
-        transform: rotateY(0deg);
-        animation-name: show;
-    }
-
-    .card-y.active .front {
-        animation-name: no-show;
-    }
-
-    /* back, initially hidden pane */
-    .back {
-        transform: rotateY(-180deg);
-        animation-name: no-show;
-    }
-
-    .card-y.active .back {
-        animation-name: show;
-    }
-
-    /* end of the flip */
-
-    /* modified of toast materialize */
-    @media only screen and (min-width : 480px) and (max-width : 1000px) {
-        #toast-container {
-            min-width: 30%;
-            bottom: 60%;
-            top: 10%;
-        }
-    }
-
-    @media only screen and (min-width : 480px) {
-        #toast-container {
-            top: auto !important;
-            right: auto !important;
-            bottom: 10%;
-            left: 10%;
-        }
-    }
-
-
     .showcase::after {
         content: '';
         height: 60vh;
         width: 100%;
-        background-image: url("{{ asset('assets/images/showcase_jelantah.jpg') }}");
+        background-image: url("http://localhost/assets/images/showcase_jelantah.jpg");
         background-size: cover, cover;
         background-position: center, center;
         background-repeat: no-repeat;
@@ -278,6 +61,9 @@
         margin-top: 1rem;
     }
     </style>
+    @endpush
+
+    @push('js_before')
 
     <script type="text/javascript">
     $(document).ready(function() {
@@ -351,19 +137,56 @@
         // subscribe
         // called when a message arrives
         function onMessageArrived(message) {
-            console.log("onMessageArrived:" + message.payloadString);
+            // console.log("onMessageArrived:" + message.payloadString);
+            console.log("onMessageArrived:" + message.destinationName);
             msg = message.payloadString;
-            var ul = document.getElementById("kontenMQTT");
-            var li = document.createElement("li");
-            var span = document.createElement("span");
-            span.innerHTML = moment().format('<br> MMMM Do YYYY, h:mm:ss a');
-            li.appendChild(document.createTextNode(msg));
-            li.appendChild(span);
-            li.setAttribute("class", "collection-item");
-            ul.appendChild(li);
+
+            // if (message.destinationName == 'sensor/heartrate') {
+
+            //     msg = message.payloadString;
+            //     var ul = document.getElementById("kontenHR_MQTT");
+            //     var li = document.createElement("li");
+            //     var span = document.createElement("span");
+            //     span.innerHTML = moment().format('<br> MMMM Do YYYY, h:mm:ss a');
+            //     li.appendChild(document.createTextNode(msg));
+            //     li.appendChild(span);
+            //     li.setAttribute("class", "collection-item");
+            //     ul.appendChild(li);
+            // } else if (message.destinationName == 'sensor/step') {
+
+            //     msg = message.payloadString;
+            //     var ul = document.getElementById("kontenStep_MQTT");
+            //     var li = document.createElement("li");
+            //     var span = document.createElement("span");
+            //     span.innerHTML = moment().format('<br> MMMM Do YYYY, h:mm:ss a');
+            //     li.appendChild(document.createTextNode(msg));
+            //     li.appendChild(span);
+            //     li.setAttribute("class", "collection-item");
+            //     ul.appendChild(li);
+            // } else if (message.destinationName == 'sensor/accelerometer') {
+
+            //     msg = message.payloadString;
+            //     var ul = document.getElementById("kontenAcc_MQTT");
+            //     var li = document.createElement("li");
+            //     var span = document.createElement("span");
+            //     span.innerHTML = moment().format('<br> MMMM Do YYYY, h:mm:ss a');
+            //     li.appendChild(document.createTextNode(msg));
+            //     li.appendChild(span);
+            //     li.setAttribute("class", "collection-item");
+            //     ul.appendChild(li);
+            // } else if (message.destinationName == 'sensor/gyroscope') {
+
+            //     msg = message.payloadString;
+            //     var ul = document.getElementById("kontenGyro_MQTT");
+            //     var li = document.createElement("li");
+            //     var span = document.createElement("span");
+            //     span.innerHTML = moment().format('<br> MMMM Do YYYY, h:mm:ss a');
+            //     li.appendChild(document.createTextNode(msg));
+            //     li.appendChild(span);
+            //     li.setAttribute("class", "collection-item");
+            //     ul.appendChild(li);
+            // }
         }
-
-
 
         // used for example purposes
         function getRandomIntInclusive(min, max) {
@@ -400,7 +223,7 @@
                 },
                 plugins: {
                     streaming: {
-                        duration: 100000, // display data for the latest 
+                        duration: 50000, // display data for the latest 
                         delay: 100,
                         onRefresh: function(myChart) { // callback on chart
                             myChart.data.datasets.forEach(function(dataset) {
@@ -425,63 +248,20 @@
 
     });
     </script>
-</head>
-
-<body>
-
-
-    <div class="footer-fixed" id="menu">
-        <nav class="z-depth-0 indigo lighten-1">
-            <div id="nav-mobile" class="nav-wrapper">
-                <a href="#" data-target="navigasi" class="sidenav-trigger right"><i
-                        class="material-icons right">menu</i>Menu</a>
-                <ul class="justify hide-on-med-and-down"
-                    style="position: absolute; left: 50%; transform: translate(-50%);">
-                    <li class="tab col s2"><a href="sass.html"><i class="material-icons left">search</i>Link with
-                            Left Icon</a></li>
-                    <li class="tooltipped tab col s2" data-position="top" data-tooltip="Github">
-                        <a href="https://github.com/Apri1221?tab=repositories"><i class="material-icons">code</i></a>
-                    </li>
-                    <li class="tooltipped tab col s2" data-position="top" data-tooltip="LinkedIn">
-                        <a class="active" href="https://www.linkedin.com/in/apriyanto-tobing-95b4b612a/"><i
-                                class="material-icons">account_circle</i></a></li>
-                    <li class="tooltipped tab col s2" data-position="top" data-tooltip="Medium">
-                        <a href="https://medium.com/@apriyantotobing8"><i class="material-icons">book</i></a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <ul class="sidenav" id="navigasi">
-            <li class="subheader center-align">Features</li>
-            <li><a class="waves-effect active" href="#">Beranda</a></li>
-            <div class="divider"></div>
-            <li><a class="waves-effect" href="badges.html">Apri</a></li>
-            <div class="divider"></div>
-            <li><a class="waves-effect" href="collapsible.html">Kezia dan Dolin</a></li>
-            <div class="divider"></div>
-            <li><a class="waves-effect" href="mobile.html">Bersatu</a></li>
-        </ul>
-    </div>
-
-    <header class="showcase">
-        <div class="content">
-            <img src="https://image.ibb.co/ims4Ep/logo.png" class="logo" alt="Traversy Media">
-            <div class="title">
-                We Offer You a New Era of Technology
-            </div>
-        </div>
-    </header>
+    @endpush
 
 
     <div class="container" style="margin-bottom:5em">
 
         <div class="section white">
+            
             @if(Session::has('account'))
             <h2>Eh, hi {{ Session::get('account')['username'] }} ! Long time no see</h2>
             @else
-            <h2 class="header">Every heroes didnt wear a capes</h2>
+            <h2 class="header">With 
+            <img style="width: 2em;" src="{{ asset('assets/images/ucok.png') }}" class="logo" alt="Traversy Media">
+            , everyone can be heroes</h2>
             @endif
-            <p class="grey-text text-darken-3 lighten-3">Love the process.</p>
 
             @if(Session::has('gagal'))
             <script>
@@ -492,8 +272,8 @@
             </script>
             @endif
         </div>
-        <div class="parallax-container">
-            <div class="parallax"><img src="https://brandjaws.com/images/boy.png"></div>
+        <div class="parallax-container" style="height: 500px">
+            <div class="parallax" style="margin-top: -15em"><img src="{{ asset('assets/images/boy.png') }}"></div>
         </div>
 
         <div class="section white">
@@ -523,16 +303,14 @@
                                                 <input type="password" id="password_register" name="password"
                                                     class="validate" required="" aria-required="true" />
                                             </div>
-                                        </div>
-                                        <p>Jika tidak keberatan, izinkan kami memberikan informasi terbaru terkait
-                                            produk jelantah kepada kamu
-                                            melalui email.</p>
-                                        <div class="section">
                                             <div class="input-field">
                                                 <i class="material-icons prefix">email</i>
                                                 <label for="email">Email</label>
-                                                <input type="email" id="email" name="email" class="validate" />
+                                                <input type="email" id="email" name="email" class="validate" required="" aria-required="true" />
                                             </div>
+                                        </div>
+                                        <p>Jika kamu memiliki perangkat, masukkan ID perangkat yang telah kamu miliki pada kolom berikut.</p>
+                                        <div class="section">
                                             <div class="input-field">
                                                 <i class="material-icons prefix">devices_other</i>
                                                 <label for="perangkat">Perangkat</label>
@@ -612,35 +390,30 @@
                 <canvas id="mycanvas"></canvas>
             </div>
 
-            <ul class="collection with-header" id="kontenMQTT">
+            <ul class="collection with-header" id="kontenHR_MQTT">
                 <li class="collection-header">
-                    <h4>Data Masuk</h4>
+                    <h4>Data Detak Jantung Masuk</h4>
+                </li>
+            </ul>
+
+            <ul class="collection with-header" id="kontenStep_MQTT">
+                <li class="collection-header">
+                    <h4>Data Langkah Masuk</h4>
+                </li>
+            </ul>
+
+            <ul class="collection with-header" id="kontenAcc_MQTT">
+                <li class="collection-header">
+                    <h4>Data Akselerasi Masuk</h4>
+                </li>
+            </ul>
+
+            <ul class="collection with-header" id="kontenGyro_MQTT">
+                <li class="collection-header">
+                    <h4>Data Giroskop Masuk</h4>
                 </li>
             </ul>
         </div>
 
     </div>
-
-    <!-- MQTT websocket -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-    <!-- charting with chart js -->
-    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
-    <script defer type="text/javascript"
-        src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.1.0/chartjs-plugin-streaming.js">
-    </script>
-
-    <script>
-    $(document).ready(function() {
-        $('.tooltipped').tooltip({
-            delay: 50
-        });
-
-    });
-    </script>
-
-</body>
-
-</html>
+@endsection

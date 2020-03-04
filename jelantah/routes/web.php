@@ -15,3 +15,6 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/register', 'CustomerController@store')->name('register');
 Route::post('/login', 'CustomerController@login')->name('login');
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard/device', 'DashboardController@device')->name('device');
