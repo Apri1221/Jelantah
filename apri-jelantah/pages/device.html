@@ -1,0 +1,96 @@
+<div class="section">
+    <h3 class="header">Dashboard
+        <img style="width: 2em;" src="images/ucok.png" class="logo">
+    </h3>
+
+    <div class="row">
+        <div class="col s12 l3">
+            <div class="box sidebox center-align">
+                <h5 class="title-obj">Apri</h5>
+            </div>
+            <div class="box sidebox">
+                <div class="collection">
+                    <a href="#!" class="collection-item">Riwayat</a>
+                    <a href="#dashboard" class="collection-item active link-page">Perangkat</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col s12 l9">
+            <div class="card-panel z-depth-0">
+
+                <div id="modded" class="row">
+                    <div class="col s12">
+                        <h5>Outlet KFC Cabang Medan Empire.</h5>
+                        <p>Klik bar untuk mengetahui informasi minyak jelantah yang kamu kumpulkan</p>
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header">
+
+                                    <div class="progress blue lighten-4">
+                                        <span>Tangki<i class="material-icons">info_outline</i></span>
+                                        <!-- bakal otomatis dirubah -->
+                                        <div id="capacity" class="determinate blue" style="width: 0%; animation: grow 5s;">0%
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="collapsible-body">Ini adalah informasi terkait minyak jelantah yang
+                                    telah kamu kumpulkan. Semakin besar persentasenya, maka sebaiknya kamu harus
+                                    beritahu kami untuk menjemputnya.</div>
+                            </li>
+                        </ul>
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header">
+
+                                    <div class="progress blue lighten-4">
+                                        <span>Kualitas<i class="material-icons">info_outline</i></span>
+                                        <!-- bakal otomatis dirubah -->
+                                        <div id="quality" class="determinate blue" style="width: 0%; animation: grow 4s;">0%
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="collapsible-body">Informasi ini terkait kualitas minyak jelantah yang
+                                    telah kamu kumpulkan. Kualitas bisa menjadi buruk jika kamu memasukkan hal-hal
+                                    aneh ke dalamnya.</div>
+                            </li>
+                        </ul>
+
+                        <br>
+                        <div class="divider">
+                        </div>
+                        <div class="right-align">
+                            <a class="btn waves-effect waves-light indigo lighten-1 btn-large modal-trigger"
+                                href="#modal1">Jemput</a>
+                        </div>
+
+                        <!-- Modal Structure -->
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                                <h4>Jemput jelantah Anda?</h4>
+                                <p>Kamu boleh tambahkan informasi berikut ini agar kami tidak tersesat</p>
+
+                                <div class="input-field">
+                                    <i class="material-icons prefix">phone</i>
+                                    <label for="phone">Nomor telfon yang bisa dihubungi</label>
+                                    <input type="tel" id="phone" name="phone" class="validate" />
+                                </div>
+                                <div class="input-field">
+                                    <i class="material-icons prefix">location_on</i>
+                                    <label for="lokasi">Alamat</label>
+                                    <input type="text" id="lokasi" name="lokasi" class="validate" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-close waves-effect btn indigo lighten-1 btn">Konfirmasi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

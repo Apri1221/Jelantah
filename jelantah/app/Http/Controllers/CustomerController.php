@@ -104,7 +104,6 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Customer $customer)
     public function update(Request $request, $username)
     {
         //
@@ -149,15 +148,15 @@ class CustomerController extends Controller
         $boolPass = Hash::check($result['password'], $request->password);
 
         if ($result && $boolPass) {
-            $request->session()->flash('gagal', $request->password);
-            return back();
-        } else {
             $data = [
                 'username' => $request->username,
                 'password' => bcrypt($request->password),
                 'email' => $request->email,
             ];
             Session::put('account', $data);
+            return back();
+        } else {
+            $request->session()->flash('gagal', $request->password);
             return back();
         }
     }
